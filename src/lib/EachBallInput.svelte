@@ -54,17 +54,23 @@
             label: "Wicket",
             isWicket: true,
             isWide: false,
-            isNoBall: true
+            isNoBall: false
         }
     ];
 
+    /**
+     * @param ball {import("../ambient").Ball}
+     */
+    function setBallValue(ball){
+
+    }
 </script>
 
 <div class="each-ball">
     <p>Ball 1</p>
     <div class="pure-g">
         {#each options as option}
-        <button class="pure-u-1-4 each-ball-button">{option.label}</button>
+        <button class="pure-u-1-4 each-ball-button" on:click={() => setBallValue(option)}>{option.label}</button>
         {/each}
     </div>
     <div class="pure-g">

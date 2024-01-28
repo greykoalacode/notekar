@@ -5,6 +5,11 @@
 	let oversSelected = false;
 
 	let overs = 0;
+    let currentOver = 1;
+    /**
+     * @type boolean
+     */
+    let isOverCompleted;
 
 	/**
 	 * @param {number} a
@@ -39,5 +44,5 @@
 	{/if}
     {:else}
     <h4>Overs: {overs}</h4>
-    <OverInput />
+    <OverInput currentOver={currentOver} isOverCompleted={isOverCompleted} />
 {/if}
