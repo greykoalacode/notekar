@@ -1,7 +1,7 @@
 .nav{
     padding: 16px;
     text-align: center;
-    width: 600px;
+    width: 900px;
     margin: 0 auto;
 }
 
@@ -16,5 +16,6 @@
 }
 
 .title {
+    text-align: left;
     margin: 0;
 }
