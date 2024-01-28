@@ -19,3 +19,18 @@
     text-align: left;
     margin: 0;
 }
+
+.over-input {
+    padding: 8px;
+    width: 100px;
+}
+
+.each-ball {
+    padding: 16px;
+    border: 1px solid gray;
+    margin: 1em 0;
+}
+
+.each-ball-button {
+    padding: 16px 8px;
+}
