@@ -20,8 +20,10 @@
 </script>
 <EachBallInput />
 <h3>Over {currentOver}</h3>
+{#if isOverCompleted}
 <div class="pure-g">
 	{#each balls as ball}
 		<input class="pure-u-1-6 over-input" bind:value={ball} type="number" />
 	{/each}
 </div>
+{/if}
