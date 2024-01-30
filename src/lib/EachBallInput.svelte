@@ -66,6 +66,7 @@
     }
 </script>
 
+<!-- Need a linkedlist to implement this over feature (prev, next) -->
 <div class="each-ball">
     <p>Ball 1</p>
     <div class="pure-g">

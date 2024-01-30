@@ -35,12 +35,12 @@
 
 {#if !oversSelected}
 	<h2>Select Overs</h2>
-	<button on:click={() => setOvers(5)}>5</button>
-	<button on:click={() => setOvers(10)}>10</button>
-	<button on:click={setCustom}>Custom</button>
-	<input placeholder="No. of Overs" bind:value={overs} type="number" />
+	<button class="base-button" on:click={() => setOvers(5)}>5</button>
+	<button class="base-button" on:click={() => setOvers(10)}>10</button>
+	<button class="base-button" on:click={setCustom}>Custom</button>
+	<input class="over-custom-input" placeholder="No. of Overs" bind:value={overs} type="number" />
 	{#if overs != 0}
-		<button on:click={saveSettings}>Save</button>
+		<button class="base-button" on:click={saveSettings}>Save</button>
 	{/if}
     {:else}
     <h4>Overs: {overs}</h4>

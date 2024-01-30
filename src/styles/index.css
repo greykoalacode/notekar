@@ -1,36 +1,109 @@
-.nav{
-    padding: 16px;
-    text-align: center;
-    width: 900px;
-    margin: 0 auto;
+body {
+	background-color: #acadbc;
+	background-color: #345995;
+    background-color: #EEF0F2;
+	color: #eac435;
+    color: #846A6A;
+	/* color: #FB4D3D; */
 }
 
-.nav a{
-    text-decoration: none;
-    color: #000;
+/* 
+<uniquifier>: Use a uniquifier for the class name 
+
+<weight>: Use a value from 100 to 900
+*/
+
+.bebas-neue-regular {
+	font-family: 'Bebas Neue', sans-serif;
+	font-weight: 400;
+    letter-spacing: 0.15em;
+	font-style: normal;
+}
+
+.bebas-neue-regular h3 {
+    letter-spacing: 0.15em;
+}
+
+
+a {
+    color: #846A6A;
+    padding: 4px 2px;
+    max-width: auto;
+}
+
+.nav {
+	padding: 16px;
+	text-align: center;
+	width: 900px;
+	margin: 0 auto;
+}
+
+.nav a {
+	text-decoration: none;
 }
 
 .body-layout {
-    width: 900px;
-    margin: 0 auto;
+	width: 900px;
+	margin: 0 auto;
 }
 
 .title {
-    text-align: left;
-    margin: 0;
+	text-align: left;
+	margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+p{
+	margin: 8px 0;
+}
+
+.base-button {
+    background-color: #846A6A;
+	color: #EEF0F2;
+    border-color: #846A6A;
+	padding: 4px 8px;
+	margin: 0 2px;
+	border-radius: 4px;
+}
+
+.over-button {
+	background-color: black;
+	color: white;
+	padding: 4px 8px;
+	margin: 0 2px;
+	border-radius: 4px;
+}
+
+.over-custom-input {
+	padding: 4px 8px;
+	border-radius: 4px;
 }
 
 .over-input {
-    padding: 8px;
-    width: 100px;
+	padding: 8px;
+	width: 100px;
 }
 
 .each-ball {
-    padding: 16px;
-    border: 1px solid gray;
-    margin: 1em 0;
+	padding: 16px;
+	border: 1px solid gray;
+	border-radius: 4px;
+	width: 500px;
+	margin: 1em 0;
 }
 
 .each-ball-button {
-    padding: 16px 8px;
+	padding: 16px 8px;
+	margin: 8px 2px;
+	width: 120px;
+	background-color: transparent;
+    border: 1px solid #846A6A;
+	border-radius: 4px;
+}
+
+footer {
+	text-align: center;
 }

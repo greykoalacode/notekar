@@ -1,11 +1,17 @@
-<nav id="layout">
+<nav id="layout" class="bebas-neue-regular">
 	<div class="pure-g nav">
 		<h3 class="pure-u-1-2 title">Notekar</h3>
 		<div class="pure-u-1-2">
 			<div class="pure-g">
-				<a href="/" class="pure-u-1-3">Home</a>
-				<a href="/games/new" class="pure-u-1-3">Start new</a>
-				<a href="/games/all" class="pure-u-1-3">My games</a>
+				<div class="pure-u-1-3">
+					<a href="/">Home</a>
+				</div>
+				<div class="pure-u-1-3">
+					<a href="/games/new">Start new</a>
+				</div>
+				<div class="pure-u-1-3">
+					<a href="/games/all">My games</a>
+				</div>
 			</div>
 		</div>
 	</div>
