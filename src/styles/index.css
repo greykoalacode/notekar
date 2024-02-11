@@ -34,7 +34,7 @@ a {
 .nav {
 	padding: 16px;
 	text-align: center;
-	width: 900px;
+	/* width: 900px; */
 	margin: 0 auto;
 }
 
@@ -43,7 +43,8 @@ a {
 }
 
 .body-layout {
-	width: 900px;
+	/* width: 900px; */
+	padding: 1em;
 	margin: 0 auto;
 }
 
@@ -84,24 +85,34 @@ p{
 
 .over-input {
 	padding: 8px;
+	border: 1px solid black;
 	width: 100px;
 }
 
 .each-ball {
-	padding: 16px;
-	border: 1px solid gray;
+	/* padding: 16px; */
+	/* border: 1px solid gray; */
 	border-radius: 4px;
-	width: 500px;
+	/* width: 00px; */
 	margin: 1em 0;
 }
 
+.current-ball {
+	background-color: #846A6A;
+	color: #EEF0F2;
+}
+
+.each-ball-layout {
+	/* padding: 8px; */
+	justify-content: center;
+}
+
 .each-ball-button {
-	padding: 16px 8px;
-	margin: 8px 2px;
-	width: 120px;
+	padding: 8px;
+	height: 100px;
 	background-color: transparent;
     border: 1px solid #846A6A;
-	border-radius: 4px;
+	/* border-radius: 4px; */
 }
 
 footer {
