@@ -43,7 +43,7 @@ a {
 }
 
 .body-layout {
-	/* width: 900px; */
+	width: 750px;
 	padding: 1em;
 	margin: 0 auto;
 }
@@ -86,7 +86,12 @@ p{
 .over-input {
 	padding: 8px;
 	border: 1px solid black;
-	width: 100px;
+	width: 60px;
+}
+
+.center {
+	margin:  0 1em;
+	/* width: 400px; */
 }
 
 .each-ball {
