@@ -109,5 +109,5 @@ export function getCurrentStatus(currentOver: number, currentBall:number, balls:
 	for (let i = 0; i < currentBall; i++) {
 		if (!balls[i].isNoBall && !balls[i].isWide) currentIndex += 1;
 	}
-    return currentOver.toString()+"."+(currentIndex).toString();
+    return currentOver.toString()+"."+(currentIndex+1).toString();
 }

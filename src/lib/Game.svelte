@@ -64,5 +64,6 @@
 	<h4>Overs: {overs}</h4>
 	<h4>Wickets: {wickets}</h4>
 	<h4>Score: {score}</h4>
+	
 	<OverInput {currentOver} {isOverCompleted} />
 {/if}

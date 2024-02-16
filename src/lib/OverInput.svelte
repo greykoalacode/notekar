@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { generateBallLabel, type EachBallOption, getCurrentStatus, options } from '$lib';
+	import type { ChangeEventHandler } from 'svelte/elements';
 	import Player from './Player.svelte';
 
 	let playerComponent: Player;
@@ -7,7 +8,7 @@
 	/**
 	 * @type {number}
 	 */
-	let currentBall: number = 1;
+	let currentBallIndex: number = 0;
 
 	/**
 	 * @type {number}
@@ -19,23 +20,23 @@
 	 */
 	let balls: EachBallOption[] = Array(6).fill(options[0], 0, 6);
 
+	$: currentBall = balls[currentBallIndex];
+
 	/**
 	 *
 	 * @param currentBall
 	 * @param option
 	 */
 	function setBallValue(currentBall: number, option: EachBallOption) {
-		if (option.isNoBall || option.isWide) {
-			balls = [...balls, options[0]]
-		}
-		if(option.runs % 2 !== 0) {
+		if (option.runs % 2 !== 0) {
 			playerComponent.changeStrike();
 		}
-		balls[currentBall - 1] = option;
-	}
-
-	function setExtraRuns(currentBall: number, runs: number){
-		balls[currentBall-1].runs = runs;
+		let hasExtraBall = option.isNoBall || option.isWide;
+		console.log(balls[currentBall], hasExtraBall, option);
+		balls = [...balls.slice(0, currentBall), {...option}, ...balls.slice(currentBall+1)];
+		if(hasExtraBall){
+			balls = [...balls, {...options[0]}];
+		}
 	}
 
 	/**
@@ -45,34 +46,39 @@
 
 	export let isOverCompleted: boolean = false;
 
-	$: hasPrevious = currentBall === 1;
-	$: hasNext = currentBall >= balls.length;
+	$: hasPrevious = currentBallIndex === 0;
+	$: hasNext = currentBallIndex >= balls.length;
 
 	function nextBall() {
-		if (currentBall < balls.length) currentBall = currentBall +1;
+		if (currentBallIndex < balls.length) currentBallIndex = currentBallIndex + 1;
 	}
 
 	function previousBall() {
-		if (currentBall > 1) currentBall -= 1;
+		if (currentBallIndex > 0) currentBallIndex -= 1;
 	}
 </script>
 
 <h3>Over {currentOver}</h3>
 <h3>Over-wise score: {overScore}</h3>
 <p>
-	{
-		JSON.stringify(balls)
-	}
+	{JSON.stringify(balls)}
+	{currentBallIndex}
 </p>
-<p>{JSON.stringify(options)}</p>
+<!-- <p>{JSON.stringify(options)}</p> -->
 <Player bind:this={playerComponent} />
 
 {#if !isOverCompleted}
+	<button on:click={() => {
+		currentOver += 1;
+		// isOverCompleted = true;
+	}}>Next Over</button>
 	<div class="pure-g center">
 		{#each balls as ball, index}
-			<span class="pure-u-1-6 over-input {currentBall == index + 1 && 'current-ball'}"
-				>{generateBallLabel(ball)}</span
-			>
+			<div>
+				<span class="pure-u-1-6 over-input {currentBallIndex === index && 'current-ball'}"
+					>{generateBallLabel(ball)}</span
+				>
+			</div>
 		{/each}
 	</div>
 {:else}
@@ -80,27 +86,23 @@
 {/if}
 
 <div class="each-ball">
-	<p>Ball {getCurrentStatus(currentOver, currentBall, balls)}</p>
+	<p>Ball {getCurrentStatus(currentOver, currentBallIndex, balls)}</p>
+	{#if currentBall.isWicket || currentBall.isWide || currentBall.isNoBall}
+		<div>
+			<span>Extra Runs</span>
+			<input class="" bind:value={currentBall.runs} />
+		</div>
+	{/if}
 	<div class="pure-g">
-		<button disabled={hasPrevious} class="pure-u-1-5" on:click={previousBall}>Previous</button
-		>
+		<button disabled={hasPrevious} class="pure-u-1-5" on:click={previousBall}>Previous</button>
 		<div class="pure-g pure-u-3-5 each-ball-layout">
 			{#each options as option}
 				<button
 					class="pure-u-1-3 each-ball-button"
-					on:click={() => setBallValue(currentBall, option)}>{option.label}</button
+					on:click={() => setBallValue(currentBallIndex, option)}>{option.label}</button
 				>
 			{/each}
-			{#if balls[currentBall - 1].isWicket || balls[currentBall - 1].isWide || balls[currentBall - 1].isNoBall}
-			<div>
-				<span>Runs</span>
-				<input class="" bind:value={balls[currentBall-1].runs} />
-				<!-- on:change={e => setExtraRuns(currentBall, Number.parseInt(e.currentTarget.value))} -->
-			</div>
-			{/if}
 		</div>
-		<button disabled={hasNext} class="pure-u-1-5" on:click={nextBall}
-			>Next</button
-		>
+		<button disabled={hasNext} class="pure-u-1-5" on:click={nextBall}>Next</button>
 	</div>
 </div>
