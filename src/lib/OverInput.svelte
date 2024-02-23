@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { generateBallLabel, type EachBallOption, getCurrentStatus, options } from '$lib';
-	import type { ChangeEventHandler } from 'svelte/elements';
 	import Player from './Player.svelte';
 
 	let playerComponent: Player;
@@ -22,6 +21,17 @@
 
 	$: currentBall = balls[currentBallIndex];
 
+	$: legalBallCount = getCurrentStatus(currentBallIndex, balls);
+
+	$: {
+		balls = [
+			...balls.slice(0, 6),
+			...Array(balls.filter((eachBall) => eachBall.isNoBall || eachBall.isWide).length).fill(
+				options[0]
+			)
+		];
+	}
+
 	/**
 	 *
 	 * @param currentBall
@@ -31,12 +41,7 @@
 		if (option.runs % 2 !== 0) {
 			playerComponent.changeStrike();
 		}
-		let hasExtraBall = option.isNoBall || option.isWide;
-		console.log(balls[currentBall], hasExtraBall, option);
-		balls = [...balls.slice(0, currentBall), {...option}, ...balls.slice(currentBall+1)];
-		if(hasExtraBall){
-			balls = [...balls, {...options[0]}];
-		}
+		balls = [...balls.slice(0, currentBall), { ...option }, ...balls.slice(currentBall + 1)];
 	}
 
 	/**
@@ -47,7 +52,7 @@
 	export let isOverCompleted: boolean = false;
 
 	$: hasPrevious = currentBallIndex === 0;
-	$: hasNext = currentBallIndex >= balls.length;
+	$: hasNext = currentBallIndex >= balls.length - 1;
 
 	function nextBall() {
 		if (currentBallIndex < balls.length) currentBallIndex = currentBallIndex + 1;
@@ -58,20 +63,29 @@
 	}
 </script>
 
-<h3>Over {currentOver}</h3>
-<h3>Over-wise score: {overScore}</h3>
-<p>
-	{JSON.stringify(balls)}
-	{currentBallIndex}
-</p>
-<!-- <p>{JSON.stringify(options)}</p> -->
+<div class="pure-g text-center">
+	<!-- aligning the stats -->
+	<div class="pure-u-1-3">
+		<p>Over {currentOver - 1}</p>
+	</div>
+	<div class="pure-u-1-3">
+		<p>Think about this!</p>
+	</div>
+	<div class="pure-u-1-3">
+		<p>Extras: {overScore}</p>
+	</div>
+</div>
+
 <Player bind:this={playerComponent} />
 
 {#if !isOverCompleted}
-	<button on:click={() => {
-		currentOver += 1;
-		// isOverCompleted = true;
-	}}>Next Over</button>
+	<button
+		disabled={legalBallCount != 6}
+		on:click={() => {
+			currentOver += 1;
+		}}>Next Over</button
+	>
+	<p>Ball {(currentOver - 1).toString() + '.' + legalBallCount.toString()}</p>
 	<div class="pure-g center">
 		{#each balls as ball, index}
 			<div>
@@ -86,11 +100,10 @@
 {/if}
 
 <div class="each-ball">
-	<p>Ball {getCurrentStatus(currentOver, currentBallIndex, balls)}</p>
 	{#if currentBall.isWicket || currentBall.isWide || currentBall.isNoBall}
 		<div>
 			<span>Extra Runs</span>
-			<input class="" bind:value={currentBall.runs} />
+			<input bind:value={currentBall.runs} />
 		</div>
 	{/if}
 	<div class="pure-g">

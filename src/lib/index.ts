@@ -104,10 +104,10 @@ export function generateBallLabel(option: EachBallOption) {
 	return label;
 }
 
-export function getCurrentStatus(currentOver: number, currentBall:number, balls: EachBallOption[]) {
+export function getCurrentStatus(currentBall:number, balls: EachBallOption[]) {
 	let currentIndex = 0;
 	for (let i = 0; i < currentBall; i++) {
 		if (!balls[i].isNoBall && !balls[i].isWide) currentIndex += 1;
 	}
-    return currentOver.toString()+"."+(currentIndex+1).toString();
+    return currentIndex+1;
 }

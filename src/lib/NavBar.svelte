@@ -1,4 +1,4 @@
-<nav id="layout" class="bebas-neue-regular">
+<nav class="bebas-neue-regular">
 	<div class="pure-g nav">
 		<h3 class="pure-u-1-2 title">Notekar</h3>
 		<div class="pure-u-1-2">
