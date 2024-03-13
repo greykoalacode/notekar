@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { generateBallLabel, type EachBallOption, getCurrentStatus, options } from '$lib';
 	import Player from './Player.svelte';
+	import { overs } from './stores';
 
 	let playerComponent: Player;
 
@@ -49,6 +50,9 @@
 	 */
 	export let currentOver: number;
 
+	let setOvers: number;
+	overs.subscribe(value => setOvers = value);
+
 	export let isOverCompleted: boolean = false;
 
 	$: hasPrevious = currentBallIndex === 0;
@@ -80,7 +84,7 @@
 
 {#if !isOverCompleted}
 	<button
-		disabled={legalBallCount != 6}
+		disabled={legalBallCount != 6 || currentOver >= setOvers}
 		on:click={() => {
 			currentOver += 1;
 		}}>Next Over</button
