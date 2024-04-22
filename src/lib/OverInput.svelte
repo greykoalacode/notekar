@@ -25,6 +25,14 @@
 	$: legalBallCount = getCurrentStatus(currentBallIndex, balls);
 
 	$: {
+		let oversCopy = [...balls];
+		oversCopy.forEach(
+			(eachBall, index) => {
+				if(eachBall.isNoBall || eachBall.isWide){
+					oversCopy.splice(index+1, 0, options[0]);
+				}
+			}
+		);
 		balls = [
 			...balls.slice(0, 6),
 			...Array(balls.filter((eachBall) => eachBall.isNoBall || eachBall.isWide).length).fill(
@@ -39,10 +47,17 @@
 	 * @param option
 	 */
 	function setBallValue(currentBall: number, option: EachBallOption) {
+		console.log(currentBall);
+		
 		if (option.runs % 2 !== 0) {
 			playerComponent.changeStrike();
 		}
-		balls = [...balls.slice(0, currentBall), { ...option }, ...balls.slice(currentBall + 1)];
+		if(option.isNoBall || option.isWide){
+			// balls.splice(currentBall+1, 0, options[0]);
+			balls = [...balls.slice(0, currentBall), { ...option }, {...options[0]}, ...balls.slice(currentBall + 2)];
+		} else {
+			balls = [...balls.slice(0, currentBall), { ...option }, ...balls.slice(currentBall + 1)];
+		}
 	}
 
 	/**

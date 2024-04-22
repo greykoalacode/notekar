@@ -1,5 +1,5 @@
 <!-- refer -->
-<div style="height: 80vh;">
+<div style="">
     <h1>NoteKar</h1>
     <p>Your cricket note, now digital</p>
 
